@@ -1,5 +1,8 @@
 # Alloy 709 Multiaxial Creep Simulation Dataset
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16895991.svg)](https://doi.org/10.5281/zenodo.16895991)
+
+
 This dataset contains multiaxial creep simulation results for Alloy 709 generated with a crystal-plasticity finite-element (CPFE) framework. The raw data comprise time-series outputs (`out.csv`) from approximately 172 simulations at **600, 700, 800, and 900 °C**. Each `out.csv` records creep–damage evolution, including creep strains and strain rates, stresses, the damage parameter `D`, and derived quantities (e.g., hydrostatic and von Mises stresses).
 
 Directories are organized by temperature and case number (e.g., `600/600-7/out.csv`, `700/700-3/out.csv`).  
@@ -58,3 +61,12 @@ These data support reproduction of the paper’s tables and figures and can be r
 This dataset is distributed under the **Creative Commons Attribution 4.0 International (CC BY 4.0)** License.  
 You are free to share and adapt the material with appropriate credit.  
 [View the full license text](https://creativecommons.org/licenses/by/4.0/)
+
+---
+
+## Citation
+
+If you use this dataset, please cite:
+
+Baweja, S. (2025). *Multiaxial Simulation Data* [Data set]. Zenodo.  
+https://doi.org/10.5281/zenodo.16895991
