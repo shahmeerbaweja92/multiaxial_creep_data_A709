@@ -25,13 +25,16 @@ Suffixes in subfolder names further specify the stress mode:
 
 ---
 
-## Processed Summary
+## Curated Rupture Summary
 
-A processed summary for 80 curated cases, **`tr_results_2.xlsx`**, provides the tabulated multiaxial creep rupture data (time to rupture, *tr*, in hours) corresponding to Appendix A of the manuscript  
-*“Development of Predictive Model for Accurate Rupture Time from Multiaxial Creep in Alloy 709 with Physics-Based Simulations.”*  
+The file **`tr_results_2.xlsx`** provides a **curated rupture-summary** of 80 selected simulations that correspond directly to the multiaxial creep-rupture data reported in **Appendix B** of the manuscript:
 
-Each row lists stress-state type, temperature, principal stresses (σ₁, σ₂, σ₃ in MPa), and *tr*.  
-(Biaxial appendix entries are presented as rounded engineering values; raw `out.csv` files retain full precision.)
+*“Development of Predictive Model for Accurate Rupture Time from Multiaxial Creep in Alloy 709 with Physics-Based Simulations.”*
+
+Each row lists the stress-state type, temperature, principal stresses (σ₁, σ₂, σ₃ in MPa), and the time-to-rupture (*tr*, in hours), where *tr* is extracted from the final simulation time step and converted from seconds to hours.
+
+> **Note:** In the manuscript Appendix, the biaxial and triaxial stress values are presented in rounded engineering form for clarity (e.g., 171.2 MPa, 32.0 MPa, 8.0 MPa).  
+> The `tr_results_2.xlsx` summary table and all `out.csv` raw time-series files in this dataset retain the **full floating-point precision** from the CPFE simulations.
 
 ---
 
@@ -41,7 +44,8 @@ These data support reproduction of the paper’s tables and figures and can be r
 
 - Benchmarking effective-stress models  
 - Validating invariant-based rupture-life predictions  
-- Developing machine-learning surrogates for multiaxial creep  
+- Developing machine-learning surrogates for multiaxial creep
+- Reproducing tables, figures, and results from the associated publication   
 
 ---
 
@@ -53,6 +57,58 @@ These data support reproduction of the paper’s tables and figures and can be r
 - `/900/.../out.csv` → Raw creep time series at 900 °C  
 - `tr_results_2.xlsx` → Processed summary (80 rows; matches tabulated data in the Appendix)  
 - `README.md` → Dataset description, structure, and column definitions  
+
+---
+
+## Column Definitions
+
+### `tr_results_2.xlsx`
+| Column | Unit | Meaning |
+|---|---|---|
+| `case` | – | Simulation case identifier (e.g., `12_c_ppn`) |
+| `T_C` | °C | Test temperature |
+| `sigma_1`, `sigma_2`, `sigma_3` | MPa | Principal stresses |
+| `tr` | h | Time to rupture |
+
+### `out.csv` (Raw Time Series)
+May include variables such as:
+- `time` (s) → simulation time  
+- `D` (–) → grain-boundary damage (approaches 1 at rupture)  
+- `avgcreep_xx, yy, zz` → creep strain components  
+- `avgstress_xx, yy, zz` (MPa) → stress tensor components  
+- `sigma_h_max/min` (MPa) → hydrostatic stress extrema  
+- `sigma_vm_max/min` (MPa) → von Mises stress extrema  
+- `strain_rate_*` (1/s) → instantaneous creep strain rate
+
+---
+
+## 6) Quick Start
+
+### Python (pandas)
+
+```python
+import pandas as pd
+
+# Load curated rupture-summary table (80 simulations)
+df = pd.read_excel("tr_results_2.xlsx")
+
+# Select 900 °C *triaxial compression* cases:
+subset = df[
+    (df["T_C"] == 900) &
+    (df["case"].str.contains("_c", regex=False)) &
+    (df["case"].str.extract(r"(\d+)").astype(int) >= 11).iloc[:, 0]
+]
+
+# Load raw time series for one selected case
+raw = pd.read_csv("900/900-12_c/out.csv")
+
+# Convert time to hours
+raw["time_hr"] = raw["time"] / 3600.0
+
+# Example: plot damage evolution
+raw.plot(x="time_hr", y="D", logy=True,
+         xlabel="Time (hours)", ylabel="Damage (D)")
+```
 
 ---
 
