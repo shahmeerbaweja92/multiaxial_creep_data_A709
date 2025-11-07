@@ -45,7 +45,6 @@ These data support reproduction of the paper’s tables and figures and can be r
 - Benchmarking effective-stress models  
 - Validating invariant-based rupture-life predictions  
 - Developing machine-learning surrogates for multiaxial creep
-- Reproducing tables, figures, and results from the associated publication   
 
 ---
 
