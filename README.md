@@ -51,12 +51,13 @@ These data support reproduction of the paper’s tables and figures and can be r
 ## File Inventory
 
 A709_data/
-    - `/600/.../out.csv` → Raw creep time series at 600 °C  
-    - `/700/.../out.csv` → Raw creep time series at 700 °C  
-    - `/800/.../out.csv` → Raw creep time series at 800 °C  
-    - `/900/.../out.csv` → Raw creep time series at 900 °C  
-tr_results_2.xlsx   (curated rupture summary, 80 cases)
-  
+  - `/600/.../out.csv` → Raw creep time series at 600 °C
+  - `/700/.../out.csv` → Raw creep time series at 700 °C
+  - `/800/.../out.csv` → Raw creep time series at 800 °C
+  - `/900/.../out.csv` → Raw creep time series at 900 °C
+
+`tr_results_2.xlsx`  (curated rupture summary, 80 cases)
+
 ---
 
 ## Column Definitions
