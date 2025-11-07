@@ -89,25 +89,39 @@ May include variables such as:
 ```python
 import pandas as pd
 
-# Load curated rupture-summary table (80 simulations)
-df = pd.read_excel("tr_results_2.xlsx")
+# **Cases 1–4** → Uniaxial  
+# **Cases 5–10** → Biaxial  
+# **Cases ≥ 11** → Triaxial 
 
-# Select 900 °C *triaxial compression* cases:
-subset = df[
-    (df["T_C"] == 900) &
-    (df["case"].str.contains("_c", regex=False)) &
-    (df["case"].str.extract(r"(\d+)").astype(int) >= 11).iloc[:, 0]
-]
+# Set temperature (°C) and case number (1–19)
+T = 900
+case_num = 12
 
-# Load raw time series for one selected case
-raw = pd.read_csv("900/900-12_c/out.csv")
+# Select suffix based on stress state:
+# ""        → tensile (uniaxial / biaxial / triaxial, where available)
+# "_c"      → compression-dominant triaxial (pnn)
+# "_c_ppn"  → mixed triaxial (ppn)
+# "_c_pnp"  → mixed triaxial (pnp)
+suffix = "_c_ppn"   # <-- change based on case mode
+
+# Construct folder path (after extracting A709_data.zip)
+case_folder = f"A709_data/{T}/{T}-{case_num}{suffix}"
+
+# Load raw time-series data
+raw = pd.read_csv(f"{case_folder}/out.csv")
 
 # Convert time to hours
 raw["time_hr"] = raw["time"] / 3600.0
 
-# Example: plot damage evolution
-raw.plot(x="time_hr", y="D", logy=True,
-         xlabel="Time (hours)", ylabel="Damage (D)")
+# Example plot: damage vs time
+raw.plot(
+    x="time_hr",
+    y="D",
+    logy=True,
+    xlabel="Time (hours)",
+    ylabel="Damage D",
+    title=f"Damage evolution: case {T}-{case_num}{suffix}"
+)
 ```
 
 ---
