@@ -133,12 +133,6 @@ You are free to share and adapt the material with appropriate credit.
 
 ---
 
-## Acknowledgment
-
-This research was supported by the U.S. Department of Energy, Office of Nuclear Energy, under Contract No. DE-AC02-06CH11357 with Argonne National Laboratory. The U.S. Government retains a non-exclusive, paid-up, irrevocable, worldwide license to publish or reproduce this dataset, or allow others to do so, for U.S. Government purposes.
-
----
-
 ## Citation
 
 If you use this dataset, please cite:
