@@ -123,15 +123,6 @@ raw.plot(
     title=f"Damage evolution: case {T}-{case_num}{suffix}"
 )
 ```
-
----
-
-## License
-
-This dataset is distributed under the **Creative Commons Attribution 4.0 International (CC BY 4.0)** License.  
-You are free to share and adapt the material with appropriate credit.  
-[View the full license text](https://creativecommons.org/licenses/by/4.0/)
-
 ---
 
 ## Citation
