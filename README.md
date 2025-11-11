@@ -82,7 +82,7 @@ May include variables such as:
 
 ---
 
-## 6) Quick Start
+## Quick Start
 
 ### Python (pandas)
 
